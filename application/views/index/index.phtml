@@ -1,0 +1,13 @@
+
+	<h1>Entries - Page <?php echo $this->page; ?></h1>
+	<?php
+	foreach ($this->entries as $entry):
+	?>
+	<div class="jumbotron">
+		<h1><?php echo $entry->title;?></h1>
+		<p><?php echo mb_substr($entry->content,0,100);?>...</p>
+	</div>
+	<?php	
+	endforeach;
+	?>
+	<?php echo $pagination;?>
