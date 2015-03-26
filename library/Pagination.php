@@ -78,7 +78,6 @@ class Pagination {
 			$this->anchor_class = 'class="' . $this->anchor_class . '" ';
 		}
 
-		//log_message('debug', "Pagination Class Initialized");
 	}
 
 	// --------------------------------------------------------------------
@@ -130,8 +129,7 @@ class Pagination {
 		}
 
 		// Determine the current page number.
-		$dispatcher = Yaf_Application::app()->getDispatcher();
-		$request = $dispatcher->getRequest();
+		$request = Yaf_Application::app()->getDispatcher()->getRequest();
 		$config = Yaf_Application::app()->getConfig();
 		if ($config->enable_query_strings === TRUE OR $this->page_query_string === TRUE) {
 			if ($request->getParam($this->query_string_segment) != $base_page) {
