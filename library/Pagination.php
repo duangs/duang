@@ -78,6 +78,7 @@ class Pagination {
 			$this->anchor_class = 'class="' . $this->anchor_class . '" ';
 		}
 
+		//log_message('debug', "Pagination Class Initialized");
 	}
 
 	// --------------------------------------------------------------------
@@ -129,7 +130,8 @@ class Pagination {
 		}
 
 		// Determine the current page number.
-		$request = Yaf_Application::app()->getDispatcher()->getRequest();
+		$dispatcher = Yaf_Application::app()->getDispatcher();
+		$request = $dispatcher->getRequest();
 		$config = Yaf_Application::app()->getConfig();
 		if ($config->enable_query_strings === TRUE OR $this->page_query_string === TRUE) {
 			if ($request->getParam($this->query_string_segment) != $base_page) {
@@ -140,7 +142,7 @@ class Pagination {
 			}
 		} else {
 			$uri = explode('/', $request->getRequestUri());
-			if ($uri[$this->uri_segment] != $base_page) {
+			if (isset($uri[$this->uri_segment]) && $uri[$this->uri_segment] != $base_page) {
 				$this->cur_page = $uri[$this->uri_segment];
 
 				// Prep the current page - no funny business!

@@ -64,4 +64,18 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
 		Zend_Db_Table::setDefaultAdapter($dbAdapter);
 	}
 
+	public function _initMysqliDB() {
+		$params = $this->_config->mysqli;
+		$mysqli = new mysqli();
+		$mysqli->connect($params->host, $params->user, $params->password, $params->dbname);
+		Yaf_Registry::set('db', $mysqli);
+	}
+
+	public function _initMongoDB() {
+		$params = $this->_config->mongo;
+		$mongo = new MongoClient("mongodb://{$params->host}:{$params->port}");
+		$mongo->connect();
+		Yaf_Registry::set('mongo', $mongo->selectDB($params->dbname));
+	}
+
 }
